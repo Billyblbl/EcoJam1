@@ -9,8 +9,11 @@ public class SelectionManager : MonoBehaviour {
 
 	public PlayerInput? input;
 	public Camera? cam;
+	public RectTransform? selectionBox;
 	[ColorUsage(true, true)] public Color boxColorBorder;
 	[ColorUsage(true, true)] public Color boxColorFill;
+	public float boxBorderThickness = 1f;
+	public float boxBorderRadius = 0f;
 	public float dragSelectThreshold;
 
 	public List<Unit>	selection = new();
@@ -104,14 +107,26 @@ public class SelectionManager : MonoBehaviour {
 		return list;
 	}
 
-	Vector2	ScreenToGUI(Vector2 vec) => new Vector2(vec.x, cam!.pixelHeight - vec.y);
+	Vector2 ScreenToGUI(Vector2 vec) => new Vector2(vec.x, Screen.height - vec.y);
+
+	Rect ScreenToGUI(Rect rect) {
+		var position = rect.position;
+		var size = rect.size;
+		position.y += size.y;
+		return new Rect(ScreenToGUI(position), size);
+	}
 
 	private void OnGUI() {
-		//TODO proper box
-		if (selecting) GUI.Box(new Rect(
-			ScreenToGUI(boxSelectionRect.min),
-			ScreenToGUI(boxSelectionRect.max) - ScreenToGUI(boxSelectionRect.min)
-		), Texture2D.whiteTexture);
+
+		if (selecting) {
+			var color = GUI.color;
+			GUI.color = boxColorFill;
+			GUI.DrawTexture(ScreenToGUI(boxSelectionRect), Texture2D.whiteTexture, ScaleMode.StretchToFill, true, 0);
+			GUI.color = boxColorBorder;
+			GUI.DrawTexture(ScreenToGUI(boxSelectionRect), Texture2D.whiteTexture, ScaleMode.StretchToFill, true, 0, boxColorBorder, boxBorderThickness, boxBorderRadius);
+			GUI.color = color;
+		}
+
 	}
 
 }
