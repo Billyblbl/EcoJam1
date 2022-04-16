@@ -1,5 +1,7 @@
 using UnityEngine;
 
+#nullable enable
+
 public class MoveOrder : Order
 {
 	public float destinationThreshold = float.Epsilon;
@@ -10,12 +12,12 @@ public class MoveOrder : Order
 
 	public override void StartExecution(Unit executor)
 	{
-		executor.agent.SetDestination(transform.position);
+		executor.agent?.SetDestination(transform.position);
 	}
 
 	public override void StopExecution(Unit executor)
 	{
-		executor.agent.SetDestination(executor.transform.position);
+		executor.agent?.SetDestination(executor.transform.position);
 	}
 
 	public override bool UpdateExecution(Unit executor)

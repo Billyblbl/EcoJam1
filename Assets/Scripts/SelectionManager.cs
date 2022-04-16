@@ -26,7 +26,10 @@ public class SelectionManager : MonoBehaviour {
 
 	public void GiveOrder(Order order) {
 		order.units += selection.Count;
-		foreach (var unit in selection) unit.orders.Enqueue(order);
+		foreach (var unit in selection) {
+			unit.orders.Enqueue(order);
+			if (unit.orders.Count == 1) order.StartExecution(unit);
+		}
 	}
 
 	private void Update() {

@@ -7,11 +7,12 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour {
 	public Renderer? selectedIndicator;
 	public Renderer? hoveredIndicator;
-	public NavMeshAgent? agent;
+	public NavMeshAgent? agent = null;
 
 	public static List<Unit> Population = new();
 
 	public Queue<Order>	orders = new();
+	// public Order? currentOrder;
 
 	public void CancelOrders() {
 		foreach (var order in orders) {
@@ -34,6 +35,15 @@ public class Unit : MonoBehaviour {
 			Physics.Raycast(cam.ScreenPointToRay(mousePos), out var hit) &&
 			hit.collider.TryGetComponent<Unit>(out unit)
 		);
+	}
+
+	private void Update() {
+
+		if (orders.TryPeek(out var currentOrder) && currentOrder.UpdateExecution(this)) {
+			currentOrder.StopExecution(this);
+			orders.Dequeue();
+			if (orders.TryPeek(out currentOrder)) currentOrder.StartExecution(this);
+		}
 	}
 
 }
