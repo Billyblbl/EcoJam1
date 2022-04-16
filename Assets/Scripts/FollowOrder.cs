@@ -10,18 +10,18 @@ public class FollowOrder : Order {
 
 	public override void StartExecution(Unit executor)
 	{
-		executor.agent?.SetDestination(transform.position);
+		if (executor.movement) executor.movement!.destination = transform.position;
 	}
 
 	public override void StopExecution(Unit executor)
 	{
-		executor.agent?.SetDestination(executor.transform.position);
+		if (executor.movement) executor.movement!.destination = executor.transform.position;
 	}
 
 	public override bool UpdateExecution(Unit executor)
 	{
-		executor.agent?.SetDestination(transform.position);
-		Debug.LogFormat("{0} Following {1}", executor.gameObject.name, gameObject.name);
+		if (executor.movement) executor.movement!.destination = transform.position;
+		// Debug.LogFormat("{0} Following {1}", executor.gameObject.name, gameObject.name);
 		return false;
 	}
 }

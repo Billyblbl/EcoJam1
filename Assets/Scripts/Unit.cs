@@ -1,13 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.AI;
 
 #nullable enable
 
 public class Unit : MonoBehaviour {
 	public Renderer? selectedIndicator;
 	public Renderer? hoveredIndicator;
-	public NavMeshAgent? agent = null;
+	public SphereMovement? movement = null;
 
 	public static List<Unit> Population = new();
 
@@ -15,6 +14,7 @@ public class Unit : MonoBehaviour {
 	// public Order? currentOrder;
 
 	public void CancelOrders() {
+		if (orders.TryPeek(out var first)) first.StopExecution(this);
 		foreach (var order in orders) {
 			order.units--;
 		}
