@@ -656,6 +656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 171602658}
   hoveredIndicator: {fileID: 28670611}
+  agent: {fileID: 0}
 --- !u!65 &266312623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -889,6 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 430064861}
   hoveredIndicator: {fileID: 230820327}
+  agent: {fileID: 0}
 --- !u!65 &480630212
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1048,6 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 1816861179}
   hoveredIndicator: {fileID: 1665114421}
+  agent: {fileID: 0}
 --- !u!1 &583513387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 561874734}
   hoveredIndicator: {fileID: 1227473232}
+  agent: {fileID: 0}
 --- !u!65 &583513390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1327,6 +1331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 976607280}
   hoveredIndicator: {fileID: 113527251}
+  agent: {fileID: 0}
 --- !u!65 &703350731
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1473,6 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 1760204013}
   hoveredIndicator: {fileID: 627258254}
+  agent: {fileID: 0}
 --- !u!65 &973599313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1831,6 +1837,7 @@ GameObject:
   - component: {fileID: 1348317155}
   - component: {fileID: 1348317156}
   - component: {fileID: 1348317157}
+  - component: {fileID: 1348317158}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -1942,6 +1949,23 @@ MonoBehaviour:
   dragSelectThreshold: 0.1
   selection: []
   hovered: []
+--- !u!114 &1348317158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348317152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f3c41a6d7acb94d841fa8192272ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectionManager: {fileID: 1348317157}
+  input: {fileID: 1348317155}
+  cam: {fileID: 1847945723}
+  terrain:
+  - {fileID: 1348317156}
 --- !u!1 &1463552745
 GameObject:
   m_ObjectHideFlags: 0

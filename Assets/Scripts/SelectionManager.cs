@@ -24,6 +24,11 @@ public class SelectionManager : MonoBehaviour {
 	bool dragging(Vector2 mousePos) => selecting && (mousePos - mousePosOnSelectDown).sqrMagnitude > dragSelectThreshold;
 	Rect boxSelectionRect;
 
+	public void GiveOrder(Order order) {
+		order.units += selection.Count;
+		foreach (var unit in selection) unit.orders.Enqueue(order);
+	}
+
 	private void Update() {
 		var click = input!.actions["Click"].ReadValue<float>() > float.Epsilon;
 		var mousePos = Mouse.current.position.ReadValue();
@@ -78,14 +83,13 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	List<Unit>	ResolveSelection(Vector2 mousePos, List<Unit>? oldSelection = null) {
-		var newList = oldSelection ?? new List<Unit>();
+		var newSelection = oldSelection ?? new List<Unit>();
 		if (dragging(mousePos)) {
-			newList.AddRange(GetUnitsInBox(boxSelectionRect).Where(unit => !newList.Contains(unit)).ToList());
-		} else if (OverUnit(mousePos, out var unit)) {
-			Debug.LogFormat("Over Unit {0}", unit!.gameObject.name);
-			newList.Add(unit!);
+			newSelection.AddRange(GetUnitsInBox(boxSelectionRect).Where(unit => !newSelection.Contains(unit)).ToList());
+		} else if (Unit.Hover(cam!, mousePos, out var unit)) {
+			newSelection.Add(unit!);
 		}
-		return newList;
+		return newSelection;
 	}
 
 	Rect RectContaining(Vector2 A, Vector2 B) {
@@ -97,9 +101,7 @@ public class SelectionManager : MonoBehaviour {
 	List<Unit>	GetUnitsInBox(Rect box) {
 		var list = new List<Unit>();
 		//TODO factions
-		// @Note : use of slow method "FindObjectsOfType" for something that can potentially be called every frame
-		var availableUnits = FindObjectsOfType<Unit>();
-		if (availableUnits != null) foreach(var unit in availableUnits) {
+		foreach(var unit in Unit.Population) {
 			//TODO raycast and filter to keep those we can actually see (not behind something)
 			if (box.Contains(cam!.WorldToScreenPoint(unit.transform.position)))
 				list.Add(unit);
