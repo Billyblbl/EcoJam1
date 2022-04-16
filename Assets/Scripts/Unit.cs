@@ -41,7 +41,7 @@ public class Unit : MonoBehaviour {
 
 		if (orders.TryPeek(out var currentOrder) && currentOrder.UpdateExecution(this)) {
 			currentOrder.StopExecution(this);
-			orders.Dequeue();
+			orders.Dequeue().units--;
 			if (orders.TryPeek(out currentOrder)) currentOrder.StartExecution(this);
 		}
 	}

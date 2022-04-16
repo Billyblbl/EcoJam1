@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour {
 
 	public PlayerInput?	input;
 	public CinemachineVirtualCamera?	cam;
-	public SphereCollider? col;
+	public Collider? col;
 	[SerializeField] private Vector3	_sensibilities = Vector3.one;
 	public Vector3	sensibilities { get => _sensibilities; set {
 		_sensibilities = value;
@@ -21,6 +21,8 @@ public class CameraController : MonoBehaviour {
 	CinemachinePOV?	pov;
 	CinemachineInputProvider?	camInputProvider;
 	Vector2 initialMaxSpeeds;
+
+	float planetRadius;
 
 	private void Start() {
 		camInputProvider = cam!.GetComponent<CinemachineInputProvider>();
@@ -33,6 +35,10 @@ public class CameraController : MonoBehaviour {
 		);
 
 		SetSpeeds(Vector2.Scale(initialMaxSpeeds, sensibilities));
+
+
+		Physics.Raycast(cam!.transform.position, -cam!.transform.localPosition.normalized, out var hit);
+		planetRadius = hit.point.magnitude;
 	}
 
 	void SetSpeeds(Vector2 speeds) {
@@ -45,7 +51,7 @@ public class CameraController : MonoBehaviour {
 		camInputProvider!.enabled = panGrab;
 
 		var zoom = input!.actions["Zoom"].ReadValue<float>();
-		transposer!.m_CameraDistance = Mathf.Max(transposer!.m_CameraDistance + zoom * sensibilities.z, col!.radius);
+		transposer!.m_CameraDistance = Mathf.Max(transposer!.m_CameraDistance + zoom * sensibilities.z, planetRadius);
 	}
 
 
