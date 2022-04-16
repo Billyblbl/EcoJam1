@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowOrder : Order {
 
-		private void Start() {
+	private void Start() {
 		OnAllComplete.AddListener(order => Destroy(this));
 	}
 

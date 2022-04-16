@@ -13,7 +13,7 @@ public class MoveOrder : Order {
 	}
 
 	public override void StopExecution(Unit executor) {
-		Debug.LogFormat("{0} : Stop execution of {1}", gameObject.name, name);
+		// Debug.LogFormat("{0} : Stop execution of {1}", gameObject.name, name);
 		if (executor.movement) executor.movement!.destination = executor.transform.position;
 	}
 
