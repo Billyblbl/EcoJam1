@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 
 #nullable enable
@@ -7,6 +8,9 @@ public class Unit : MonoBehaviour {
 	public Renderer? selectedIndicator;
 	public Renderer? hoveredIndicator;
 	public SphereMovement? movement = null;
+
+	public UnityEvent	OnSelect = new();
+	public UnityEvent	OnOrder = new();
 
 	public static List<Unit> Population = new();
 

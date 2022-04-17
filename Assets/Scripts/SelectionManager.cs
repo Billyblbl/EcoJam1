@@ -28,7 +28,10 @@ public class SelectionManager : MonoBehaviour {
 		order.units += selection.Count;
 		foreach (var unit in selection) {
 			unit.orders.Enqueue(order);
-			if (unit.orders.Count == 1) order.StartExecution(unit);
+			if (unit.orders.Count == 1) {
+				order.StartExecution(unit);
+				unit.OnOrder?.Invoke();
+			}
 		}
 	}
 
@@ -58,6 +61,7 @@ public class SelectionManager : MonoBehaviour {
 			mousePosOnSelectDown = mousePos;
 		} else if (clickUp) {
 			selection = ResolveSelection(mousePos, additiveOperation ? selection : null);
+			foreach (var unit in selection) unit.OnSelect?.Invoke();
 		}
 
 		//Feedback selection
