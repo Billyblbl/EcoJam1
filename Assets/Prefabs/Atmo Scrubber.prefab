@@ -310,7 +310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735789695215064319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.899078, y: 0, z: 49.069496}
+  m_LocalPosition: {x: -16.351856, y: 0, z: 57.72882}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -382,7 +382,7 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   speed: 5
   rampUpSpeed: 0.5
-  altitude: 51
+  altitude: 60
   destinationThreshold: 0.1
 --- !u!64 &8705986197720038228
 MeshCollider:
