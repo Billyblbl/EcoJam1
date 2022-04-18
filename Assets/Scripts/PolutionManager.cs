@@ -3,6 +3,9 @@ using UnityEngine;
 using System.Linq;
 using System.Collections;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 #nullable enable
 
 public class PolutionManager : MonoBehaviour {
@@ -15,6 +18,8 @@ public class PolutionManager : MonoBehaviour {
 	public CubeSphereGrid	mapping = new();
 	[Range(.01f, 10)] public float gizmosSize = .1f;
 
+	public bool generate = true;
+
 	IEnumerator GenerateChunks() {
 		yield return null;
 
@@ -23,24 +28,23 @@ public class PolutionManager : MonoBehaviour {
 
 		chunks = new PolutionChunk[mapping.vertices.Length];
 		foreach (var (vertex, i) in mapping.vertices.Select((v, i) => (v, i))) {
-			var go = Instantiate(polutionChunk!, transform);
-			go.transform.localPosition = vertex;
-			chunks[i] = go.GetComponent<PolutionChunk>();
+			GameObject go = (PrefabUtility.InstantiatePrefab(polutionChunk!.gameObject, transform) as GameObject)!;
+			go!.transform.localPosition = vertex;
+			go!.transform.up = go!.transform.localPosition.normalized;
+			chunks[i] = go!.GetComponent<PolutionChunk>();
 		}
 
 		// This stuff is gonna be slow af
-		foreach (var (chunk, i) in chunks.Select((c, i) => (c, i))) {
-			chunk.neighbours = chunks
-				.Where((_, j) => j != i)
-				.OrderBy(neighbour => Vector3.Distance(chunk.transform.position, neighbour.transform.position))
-				.Take(4)
-				.ToArray();
-		}
+		foreach (var (chunk, i) in chunks.Select((c, i) => (c, i))) chunk.neighbours = chunks
+			.Where((_, j) => j != i)
+			.OrderBy(neighbour => Vector3.Distance(chunk.transform.position, neighbour.transform.position))
+			.Take(4)
+			.ToArray();
 	}
 
 	private void OnValidate() {
 		mapping.GenerateVertices();
-		if (polutionChunk == null) return;
+		if (!generate || polutionChunk == null) return;
 		StartCoroutine(GenerateChunks());
 	}
 
@@ -50,4 +54,12 @@ public class PolutionManager : MonoBehaviour {
 
 #endif
 
+	public AnimationCurve spreadModel = AnimationCurve.Linear(0, 0, 1, 1);
+	public float spreadSpeed = 1f;
+
+	private void Update() {
+		foreach (var chunk in chunks!) {
+			chunk.Spread((spread) => spreadModel.Evaluate(spread), Time.deltaTime * spreadSpeed);
+		}
+	}
 }
