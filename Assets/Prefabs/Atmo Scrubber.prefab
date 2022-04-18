@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 8705986197720038228}
   - component: {fileID: 3804389164858728267}
   - component: {fileID: 6170247480974407864}
+  - component: {fileID: 4510710907602865885}
   m_Layer: 0
   m_Name: Atmo Scrubber
   m_TagString: Untagged
@@ -590,6 +591,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4510710907602865885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735789695215064319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f1a9a4b74a57548bade0b4a770ad48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: -0.005
+  range: 15
+  chunks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1328389258505124438
 GameObject:
   m_ObjectHideFlags: 0

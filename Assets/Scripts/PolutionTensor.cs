@@ -22,7 +22,7 @@ public class PolutionTensor : MonoBehaviour {
 
 	private void OnValidate() {
 		chunks = ProbeChunks();
-		Debug.LogFormat("chunks : {0} {1}", chunks.ToString() ?? "None", chunks?.Length ?? 0);
+		// Debug.LogFormat("chunks : {0} {1}", chunks.ToString() ?? "None", chunks?.Length ?? 0);
 	}
 
 	private void Update() {
