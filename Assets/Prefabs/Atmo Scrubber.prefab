@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f1a9a4b74a57548bade0b4a770ad48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: -0.005
+  strength: -0.02
   range: 15
   chunks:
   - {fileID: 0}

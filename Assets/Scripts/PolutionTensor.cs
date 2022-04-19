@@ -18,19 +18,15 @@ public class PolutionTensor : MonoBehaviour {
 
 	private void FixedUpdate() {
 		chunks = ProbeChunks();
-	}
-
-	private void OnValidate() {
-		chunks = ProbeChunks();
-		// Debug.LogFormat("chunks : {0} {1}", chunks.ToString() ?? "None", chunks?.Length ?? 0);
-	}
-
-	private void Update() {
 		if (chunks != null) foreach (var chunk in chunks) {
 			var polutionIncrease = strength * (range / Vector3.Distance(chunk.transform.position, transform.position)) * Time.deltaTime;
 			// if (polutionIncrease > float.Epsilon) Debug.LogFormat("polution increase : {0}", polutionIncrease);
 			chunk.polutionLevel += polutionIncrease;
 		}
+	}
+
+	private void OnValidate() {
+		chunks = ProbeChunks();
 	}
 
 	private void OnDrawGizmos() {

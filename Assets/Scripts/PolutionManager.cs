@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Events;
 using System.Linq;
 using System.Collections;
 
@@ -56,10 +57,15 @@ public class PolutionManager : MonoBehaviour {
 
 	public AnimationCurve spreadModel = AnimationCurve.Linear(0, 0, 1, 1);
 	public float spreadSpeed = 1f;
+	public float maxAveragePolution = 50f;
 
-	private void Update() {
-		foreach (var chunk in chunks!) {
-			chunk.Spread((spread) => spreadModel.Evaluate(spread), Time.deltaTime * spreadSpeed);
-		}
+	public UnityEvent	OnPolutionTooHigh = new();
+
+
+	private void FixedUpdate() {
+		foreach (var chunk in chunks!) chunk.Spread((spread) => spreadModel.Evaluate(spread), Time.deltaTime * spreadSpeed);
+		var average = chunks!.Average(chunk => chunk.polutionLevel);
+		if (average > maxAveragePolution) OnPolutionTooHigh?.Invoke();
 	}
+
 }

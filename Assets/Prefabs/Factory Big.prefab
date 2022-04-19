@@ -9705,7 +9705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f1a9a4b74a57548bade0b4a770ad48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 0.05
+  strength: 0.03
   range: 15
   chunks: []
 --- !u!1 &7419196767324953168
