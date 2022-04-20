@@ -36,6 +36,10 @@ public class SelectionManager : MonoBehaviour {
 	}
 
 	private void Update() {
+
+		selection.RemoveAll(u => u == null);
+		hovered.RemoveAll(u => u == null);
+
 		var click = input!.actions["Click"].ReadValue<float>() > float.Epsilon;
 		var mousePos = Mouse.current.position.ReadValue();
 		// Debug.LogFormat("Click = {0}", click);
