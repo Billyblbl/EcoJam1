@@ -9710,7 +9710,10 @@ MonoBehaviour:
   strength: 0.03
   range: 15
   gameData: {fileID: 11400000, guid: 23efe7cf58b80e24db7f66ac9696b7cb, type: 2}
+  suckEffect: {fileID: 0}
+  effectStrength: 100
   chunks: []
+  lastChange: 0
 --- !u!114 &5230621774762838872
 MonoBehaviour:
   m_ObjectHideFlags: 0

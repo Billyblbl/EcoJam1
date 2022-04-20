@@ -8,8 +8,7 @@ public class Unit : MonoBehaviour {
 
 	public Renderer? selectedIndicator;
 	public Renderer? hoveredIndicator;
-	public SphereMovement? movement = null;
-
+	public SphereMovement? movement;
 	public UnityEvent	OnSelect = new();
 	public UnityEvent	OnOrder = new();
 
