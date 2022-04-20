@@ -605,6 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: -0.02
   range: 15
+  gameData: {fileID: 11400000, guid: 23efe7cf58b80e24db7f66ac9696b7cb, type: 2}
   chunks:
   - {fileID: 0}
   - {fileID: 0}

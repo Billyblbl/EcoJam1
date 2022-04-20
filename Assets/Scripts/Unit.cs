@@ -5,6 +5,7 @@ using System.Collections.Generic;
 #nullable enable
 
 public class Unit : MonoBehaviour {
+
 	public Renderer? selectedIndicator;
 	public Renderer? hoveredIndicator;
 	public SphereMovement? movement = null;

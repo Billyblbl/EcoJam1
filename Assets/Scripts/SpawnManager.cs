@@ -5,6 +5,7 @@ using System.Linq;
 
 public class SpawnManager : MonoBehaviour {
 
+	public GameData?	gameData;
 	[System.Serializable] public struct SpawnTableEntry {
 		public Transform? entity;
 		public AnimationCurve spawnWeight;
@@ -27,6 +28,8 @@ public class SpawnManager : MonoBehaviour {
 		var entity = Instantiate(entry.entity, transform);
 		entity!.localPosition = position;
 		entity!.up = direction;
+
+		if (gameData != null) gameData!.instance.factoriesSpawned++;
 
 		return entity!;
 	}

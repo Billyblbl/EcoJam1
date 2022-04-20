@@ -7,6 +7,8 @@ public class PolutionTensor : MonoBehaviour {
 	public float strength = 0f;
 	public float range = 2f;
 
+	public GameData? gameData;
+
 	public PolutionChunk[]? chunks;
 
 	PolutionChunk[]	ProbeChunks() => Physics.OverlapSphere(transform.position, range)
@@ -22,6 +24,8 @@ public class PolutionTensor : MonoBehaviour {
 			var polutionIncrease = strength * (range / Vector3.Distance(chunk.transform.position, transform.position)) * Time.deltaTime;
 			// if (polutionIncrease > float.Epsilon) Debug.LogFormat("polution increase : {0}", polutionIncrease);
 			chunk.polutionLevel += polutionIncrease;
+			if (gameData != null && polutionIncrease > 0) gameData.instance.polutionProduced += polutionIncrease;
+			if (gameData != null && polutionIncrease < 0) gameData.instance.polutionScrubbed += polutionIncrease;
 		}
 	}
 

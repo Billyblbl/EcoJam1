@@ -14,6 +14,8 @@ public class SphereMovement : MonoBehaviour {
 
 	private void Start() {
 		destination = transform.position;
+		transform.localPosition = transform.localPosition.normalized * altitude;
+		transform.up = transform.localPosition.normalized;
 	}
 
 	private void OnValidate() {

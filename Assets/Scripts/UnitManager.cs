@@ -6,9 +6,12 @@ using System.Collections.Generic;
 
 public class UnitManager : MonoBehaviour {
 	public SelectionManager?	selectionManager;
+	public GameData?	gameData;
 	public PlayerInput?	input;
 	public Camera? cam;
 	public List<Collider> terrain = new();
+
+	public Unit[]	playerUnitTypes = new Unit[1];
 
 	private void Update() {
 		var contextOrder = input!.actions["Context Order"].triggered;
@@ -42,4 +45,9 @@ public class UnitManager : MonoBehaviour {
 		return false;
 	}
 
+	public void SpawnUnit(int index) {
+		Physics.Raycast(cam!.ScreenPointToRay(cam!.pixelRect.center), out var hit);
+		Instantiate(playerUnitTypes[index], hit.point, Quaternion.identity).transform.parent = transform;
+		if (gameData != null) gameData!.instance.unitSpawned++;
+	}
 }

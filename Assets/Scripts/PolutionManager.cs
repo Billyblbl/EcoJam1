@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,6 +11,8 @@ using UnityEditor;
 #nullable enable
 
 public class PolutionManager : MonoBehaviour {
+
+	public GameData?	gameData;
 
 	public PolutionChunk[]?	chunks;
 
@@ -55,17 +58,26 @@ public class PolutionManager : MonoBehaviour {
 
 #endif
 
+	float start;
+	private void Start() {
+		start = Time.time;
+		gameData!.instance = new();
+	}
+
 	public AnimationCurve spreadModel = AnimationCurve.Linear(0, 0, 1, 1);
 	public float spreadSpeed = 1f;
 	public float maxAveragePolution = 50f;
 
 	public UnityEvent	OnPolutionTooHigh = new();
 
-
 	private void FixedUpdate() {
 		foreach (var chunk in chunks!) chunk.Spread((spread) => spreadModel.Evaluate(spread), Time.deltaTime * spreadSpeed);
 		var average = chunks!.Average(chunk => chunk.polutionLevel);
-		if (average > maxAveragePolution) OnPolutionTooHigh?.Invoke();
+		if (average > maxAveragePolution) {
+			OnPolutionTooHigh?.Invoke();
+			if (gameData != null) gameData!.instance.playTime = Time.time - start;
+			SceneManager.LoadScene("GameOver");
+		}
 	}
 
 }
