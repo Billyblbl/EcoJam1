@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 #nullable enable
 
@@ -11,9 +12,21 @@ public class UnitManager : MonoBehaviour {
 	public Camera? cam;
 	public List<Collider> terrain = new();
 
-	public Unit[]	playerUnitTypes = new Unit[1];
+
+	[System.Serializable] public struct UnitTypeOption {
+		public Unit? unit;
+		public float lastUnitSpawn;
+		public float spawnCooldown;
+		public Image? indicator;
+		public float timeUntilNextSpawn { get => lastUnitSpawn + spawnCooldown - Time.time; }
+	}
+
+	public UnitTypeOption[] unitTypes = new UnitTypeOption[1];
 
 	private void Update() {
+		for (int i = 0; i < unitTypes.Length; i++)
+			unitTypes[i].indicator!.fillAmount = unitTypes[i].timeUntilNextSpawn / unitTypes[i].spawnCooldown;
+
 		var contextOrder = input!.actions["Context Order"].triggered;
 		var additiveOperation = input!.actions["Additive Operation"].ReadValue<float>() > float.Epsilon;
 		var mousePos = Mouse.current.position.ReadValue();
@@ -46,8 +59,11 @@ public class UnitManager : MonoBehaviour {
 	}
 
 	public void SpawnUnit(int index) {
+		if (unitTypes[index].timeUntilNextSpawn > 0) return;
+
 		Physics.Raycast(cam!.ScreenPointToRay(cam!.pixelRect.center), out var hit);
-		Instantiate(playerUnitTypes[index], hit.point, Quaternion.identity).transform.parent = transform;
+		unitTypes[index].lastUnitSpawn = Time.time;
+		Instantiate(unitTypes[index].unit!, hit.point, Quaternion.identity).transform.parent = transform;
 		if (gameData != null) gameData!.instance.unitSpawned++;
 	}
 }

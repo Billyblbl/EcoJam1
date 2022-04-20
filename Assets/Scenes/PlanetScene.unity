@@ -13520,8 +13520,11 @@ MonoBehaviour:
   cam: {fileID: 1847945723}
   terrain:
   - {fileID: 671342890}
-  playerUnitTypes:
-  - {fileID: 735789695215064304, guid: 6bc96088474b3ea4f998a8cbd20c7933, type: 3}
+  unitTypes:
+  - unit: {fileID: 735789695215064304, guid: 6bc96088474b3ea4f998a8cbd20c7933, type: 3}
+    lastUnitSpawn: 0
+    spawnCooldown: 10
+    indicator: {fileID: 1504477802484021752}
 --- !u!114 &1348317159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13596,7 +13599,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   altitude: 60
-  timeBetweenSpawns: 30
+  timeBetweenSpawns: 15
 --- !u!1001 &1352414173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20512,6 +20515,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b608b8e8d75cc94a86abe64e8eff4ae, type: 3}
+--- !u!114 &1504477802484021752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6570143915949863614, guid: 2b608b8e8d75cc94a86abe64e8eff4ae, type: 3}
+  m_PrefabInstance: {fileID: 1504477802484021751}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4515328976928108928
 MonoBehaviour:
   m_ObjectHideFlags: 0
