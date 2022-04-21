@@ -73,6 +73,7 @@ public class PolutionManager : MonoBehaviour {
 	private void FixedUpdate() {
 		foreach (var chunk in chunks!) chunk.Spread((spread) => spreadModel.Evaluate(spread), Time.deltaTime * spreadSpeed);
 		var average = chunks!.Average(chunk => chunk.polutionLevel);
+		Debug.LogFormat("Health = {0}", maxAveragePolution - average);
 		if (average > maxAveragePolution) {
 			OnPolutionTooHigh?.Invoke();
 			if (gameData != null) gameData!.instance.playTime = Time.time - start;

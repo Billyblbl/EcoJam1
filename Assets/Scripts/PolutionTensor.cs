@@ -30,7 +30,7 @@ public class PolutionTensor : MonoBehaviour {
 			// if (polutionIncrease > float.Epsilon) Debug.LogFormat("polution increase : {0}", polutionIncrease);
 			chunk.polutionLevel = Mathf.Clamp(chunk.polutionLevel + polutionChange, 0f, float.MaxValue);
 			if (gameData != null && polutionChange > 0) gameData.instance.polutionProduced += polutionChange;
-			if (gameData != null && polutionChange < 0) gameData.instance.polutionScrubbed += polutionChange;
+			if (gameData != null && polutionChange < 0) gameData.instance.polutionScrubbed -= polutionChange;
 			lastChange = polutionChange;
 		}
 	}
