@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8040246798239470948}
+  - component: {fileID: 2900608572595565415}
   m_Layer: 0
   m_Name: gfx
   m_TagString: Untagged
@@ -28,10 +29,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8160279642797980825}
   - {fileID: 6343795327185975231}
   m_Father: {fileID: 735789695215064318}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2900608572595565415
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72326718755686990}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51d500a0efa6d93468b2964b2a4653c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &735789695215064319
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +94,6 @@ Transform:
   m_Children:
   - {fileID: 143213967080049376}
   - {fileID: 6527460525415657809}
-  - {fileID: 8160279642797980825}
   - {fileID: 8040246798239470948}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -414,6 +435,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 2900608572595565415}
+          m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: end
             m_BoolArgument: 1
           m_CallState: 2
     onUpdate:
@@ -5245,7 +5278,7 @@ Transform:
   m_Children:
   - {fileID: 9179694145676261961}
   m_Father: {fileID: 8040246798239470948}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1814335822063722744
 GameObject:
@@ -5582,11 +5615,19 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 735789695215064318}
+    m_TransformParent: {fileID: 8040246798239470948}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ed1e5658780c3dc40b36171edaaec56d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed1e5658780c3dc40b36171edaaec56d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed1e5658780c3dc40b36171edaaec56d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ed1e5658780c3dc40b36171edaaec56d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
