@@ -114,8 +114,15 @@ public class SelectionManager : MonoBehaviour {
 		//TODO factions
 		foreach(var unit in Unit.Population) {
 			//TODO raycast and filter to keep those we can actually see (not behind something)
-			if (box.Contains(cam!.WorldToScreenPoint(unit.transform.position)))
+
+			var deltaCam = unit.transform.position - cam!.transform.position;
+			var ray = new Ray(cam!.transform.position, deltaCam.normalized);
+			if (
+				!Physics.Raycast(ray, out var hit, deltaCam.magnitude, LayerMask.GetMask("Terrain")) &&
+				box.Contains(cam!.WorldToScreenPoint(unit.transform.position))
+			) {
 				list.Add(unit);
+			}
 		}
 		return list;
 	}
