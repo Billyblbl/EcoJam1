@@ -17,6 +17,8 @@ public class CameraController : MonoBehaviour {
 		SetSpeeds(Vector2.Scale(initialMaxSpeeds, sensibilities));
 	}}
 
+	public float keyMovementSpeed = 10f;
+
 	CinemachineFramingTransposer?	transposer;
 	CinemachinePOV?	pov;
 	CinemachineInputProvider?	camInputProvider;
@@ -52,5 +54,11 @@ public class CameraController : MonoBehaviour {
 
 		var zoom = input!.actions["Zoom"].ReadValue<float>();
 		transposer!.m_CameraDistance = Mathf.Max(transposer!.m_CameraDistance + zoom * sensibilities.z, planetRadius);
+
+		var movement = Vector2.Scale(input!.actions["Move"].ReadValue<Vector2>(), sensibilities) * keyMovementSpeed;
+		if (movement.magnitude > float.Epsilon) {
+			pov!.m_HorizontalAxis.Value -= movement.x * Time.deltaTime;
+			pov!.m_VerticalAxis.Value += movement.y * Time.deltaTime;
+		}
 	}
 }
