@@ -53,22 +53,4 @@ public class CameraController : MonoBehaviour {
 		var zoom = input!.actions["Zoom"].ReadValue<float>();
 		transposer!.m_CameraDistance = Mathf.Max(transposer!.m_CameraDistance + zoom * sensibilities.z, planetRadius);
 	}
-
-
-	// public Vector3 sensibility = Vector3.one;
-
-	// Vector3 CameraInput { get {
-	// 	var panGrab = input!.actions["Pan Grab"].ReadValue<float>() > float.Epsilon;
-	// 	var panning = panGrab ? input!.actions["Panning"].ReadValue<Vector2>() : Vector2.zero;
-	// 	var zoom = input!.actions["Zoom"].ReadValue<float>();
-	// 	return Vector3.Scale(new Vector3(panning.x, panning.y, zoom), sensibility);
-	// }}
-
-	// public void MoveCamera(Vector3 movement) {
-	// 	transform.Rotate(Vector3.up, movement.x, Space.World);
-	// 	transform.Rotate(Vector3.right, movement.y, Space.Self);
-	// 	cam!.localPosition += Vector3.forward * movement.z;
-	// }
-
-	// private void Update() => MoveCamera(CameraInput);
 }
